@@ -1,0 +1,70 @@
+package Process;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+
+public class DeleteBook extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					DeleteBook frame = new DeleteBook();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public DeleteBook() {
+		setTitle("Delete Book");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 339, 211);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Book Name");
+		lblNewLabel.setBounds(0, 11, 72, 14);
+		contentPane.add(lblNewLabel);
+		
+		textField = new JTextField();
+		textField.setBounds(97, 8, 183, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JButton CheckBT = new JButton("Check");
+		CheckBT.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				BookInfo frame2 = new BookInfo(null);
+				frame2.setVisible(true);
+			}
+		});
+		CheckBT.setFont(new Font("Tahoma", Font.BOLD, 12));
+		CheckBT.setBounds(100, 76, 89, 23);
+		contentPane.add(CheckBT);
+	}
+}
