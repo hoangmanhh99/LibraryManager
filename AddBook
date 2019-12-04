@@ -1,0 +1,219 @@
+package Process;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.Statement;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+
+public class AddBook extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField BookID;
+	private JTextField BookName;
+	private JTextField AuthorName;
+	private JTextField CategoryName;
+	private JTextField PublisherName;
+	private JTextField Year;
+	private JTextField Price;
+	private JTextField Available;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					AddBook frame = new AddBook();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public AddBook() {
+		setTitle("Search Book");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 641, 328);
+		contentPane = new JPanel();
+		setLocationRelativeTo(null);
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblBookId = new JLabel("Book ID");
+		lblBookId.setBounds(10, 11, 90, 14);
+		contentPane.add(lblBookId);
+		
+		JLabel lblBookName = new JLabel("Book Name");
+		lblBookName.setBounds(10, 36, 90, 14);
+		contentPane.add(lblBookName);
+		
+		JLabel lblAuthorId = new JLabel("Author Name");
+		lblAuthorId.setBounds(10, 61, 90, 14);
+		contentPane.add(lblAuthorId);
+		
+		JLabel lblCategoryId = new JLabel("Category Name");
+		lblCategoryId.setBounds(10, 86, 90, 14);
+		contentPane.add(lblCategoryId);
+		
+		JLabel lblPublisherId = new JLabel("Publisher Name");
+		lblPublisherId.setBounds(10, 111, 90, 14);
+		contentPane.add(lblPublisherId);
+		
+		JLabel lblPublisherYear = new JLabel("Publisher Year");
+		lblPublisherYear.setBounds(10, 136, 90, 14);
+		contentPane.add(lblPublisherYear);
+		
+		JLabel lblPrice = new JLabel("Price");
+		lblPrice.setBounds(10, 161, 90, 14);
+		contentPane.add(lblPrice);
+		
+		JLabel lblAvailable = new JLabel("Available");
+		lblAvailable.setBounds(10, 186, 90, 14);
+		contentPane.add(lblAvailable);
+		
+		BookID = new JTextField();
+		BookID.addFocusListener(new FocusAdapter() {
+			@Override
+			public void focusLost(FocusEvent arg0) {
+				String id = BookID.getText();
+				if(id.length() == 0) {
+					JOptionPane.showMessageDialog(rootPane, "ID không được để trống");
+				}
+			}
+		});
+		BookID.setBounds(147, 8, 111, 20);
+		contentPane.add(BookID);
+		BookID.setColumns(10);
+		
+		BookName = new JTextField();
+		BookName.setColumns(10);
+		BookName.setBounds(147, 33, 111, 20);
+		contentPane.add(BookName);
+		
+		AuthorName = new JTextField();
+		AuthorName.setColumns(10);
+		AuthorName.setBounds(147, 58, 111, 20);
+		contentPane.add(AuthorName);
+		
+		CategoryName = new JTextField();
+		CategoryName.setColumns(10);
+		CategoryName.setBounds(147, 83, 111, 20);
+		contentPane.add(CategoryName);
+		
+		PublisherName = new JTextField();
+		PublisherName.setColumns(10);
+		PublisherName.setBounds(147, 108, 111, 20);
+		contentPane.add(PublisherName);
+		
+		Year = new JTextField();
+		Year.setColumns(10);
+		Year.setBounds(147, 133, 111, 20);
+		contentPane.add(Year);
+		
+		Price = new JTextField();
+		Price.setColumns(10);
+		Price.setBounds(147, 158, 111, 20);
+		contentPane.add(Price);
+		
+		Available = new JTextField();
+		Available.setColumns(10);
+		Available.setBounds(147, 186, 111, 20);
+		contentPane.add(Available);
+		
+		JButton btnNewButton = new JButton("Show Authors List");
+		btnNewButton.setBounds(338, 32, 159, 23);
+		contentPane.add(btnNewButton);
+		
+		JButton btnShowCategorieslist = new JButton("Show Categories List");
+		btnShowCategorieslist.setBounds(338, 82, 159, 23);
+		contentPane.add(btnShowCategorieslist);
+		
+		JButton btnShowPublishersList = new JButton("Show Publishers List");
+		btnShowPublishersList.setBounds(338, 132, 159, 23);
+		contentPane.add(btnShowPublishersList);
+		
+		JButton btnNewButton_1 = new JButton("Cancel");
+		btnNewButton_1.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			}
+			
+		});
+		
+		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnNewButton_1.setBounds(414, 230, 111, 34);
+		contentPane.add(btnNewButton_1);
+		
+		JButton btnAddBook = new JButton("Add Book");
+		btnAddBook.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				if( (check(BookID.getText())) && (check(BookName.getText())) && (check(AuthorName.getText())) && (check(CategoryName.getText()))
+						&& (check(PublisherName.getText())) && (check(Year.getText())) && (check(Price.getText())) ) {
+					try {
+						Connection conn = SQLSvConnection.Connect();
+						Statement stm = conn.createStatement();
+						String sql = "insert into Book(BookID, BookName, AuthorName, CategoryName, PublisherName, PublishYear, Price, Available) "
+								+ "values ('" + BookID.getText()+ "', '"
+											+ BookName.getText()+ "', '"
+											+ AuthorName.getText()+ "', '"
+											+ CategoryName.getText()+ "', '"
+											+ PublisherName.getText()+ "', "
+											+ Year.getText()+ ", "
+											+ Price.getText()+ ", "
+											+ " 1 )";
+						int RowCount = stm.executeUpdate(sql);
+						JOptionPane.showMessageDialog(null, "Add success!!!");
+						BookID.setText(null);
+						BookName.setText(null);
+						AuthorName.setText(null);
+						CategoryName.setText(null);
+						PublisherName.setText(null);
+						Year.setText(null);
+						Price.setText(null);
+						dispose();
+											
+					} catch (ClassNotFoundException | SQLException e1) {
+						// TODO: handle exception
+						e1.printStackTrace();
+						
+					}
+				}
+			}
+		});
+		btnAddBook.setFont(new Font("Tahoma", Font.PLAIN, 13));
+		btnAddBook.setBounds(10, 230, 111, 34);
+		contentPane.add(btnAddBook);
+		
+		
+	}
+	public static boolean check(String str) {
+		if(str != null && !str.isEmpty()) {
+			return true;
+		}
+		return false;
+	}
+
+}
