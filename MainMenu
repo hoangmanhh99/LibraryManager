@@ -1,0 +1,204 @@
+package Process;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Color;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class MainMenu extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					MainMenu frame = new MainMenu(null);
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public MainMenu(String user) throws ClassNotFoundException, SQLException{
+		int count = 0;
+		int price = 0;
+		int available = 0;
+		int unvailable = 0;
+		ResultSet rs = SQLSvConnection.querry("Select * from Book");
+		while(rs.next()) {
+			count++;
+			price += rs.getInt("Price");
+			if(rs.getInt("Available") == 1) {
+				available++;
+			} else {
+				unvailable++;
+			}
+		}
+		setTitle("MainMenu");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 641, 328);
+		setLocationRelativeTo(null);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.LIGHT_GRAY);
+		panel.setBounds(10, 11, 296, 179);
+		contentPane.add(panel);
+		panel.setLayout(null);
+
+		JLabel lblTh = new JLabel("TH\u00D4NG TIN TH\u01AF VI\u1EC6N");
+		lblTh.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblTh.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTh.setBounds(67, 11, 136, 22);
+		panel.add(lblTh);
+
+		JLabel lblAllBooks = new JLabel("All books:");
+		lblAllBooks.setBounds(10, 47, 72, 14);
+		panel.add(lblAllBooks);
+
+		JLabel lblBookTotal = new JLabel("Book in Libs:");
+		lblBookTotal.setBounds(10, 72, 72, 14);
+		panel.add(lblBookTotal);
+
+		JLabel lblBooksRent = new JLabel("Books rent:");
+		lblBooksRent.setBounds(10, 97, 72, 14);
+		panel.add(lblBooksRent);
+
+		JLabel lblTotalValues = new JLabel("Total values:");
+		lblTotalValues.setBounds(10, 122, 72, 14);
+		panel.add(lblTotalValues);
+
+		JLabel lblTotalDeposits = new JLabel("Total Deposits:");
+		lblTotalDeposits.setBounds(10, 147, 72, 14);
+		panel.add(lblTotalDeposits);
+
+		JLabel lblNewLabel_1 = new JLabel("New label");
+		lblNewLabel_1.setBounds(105, 44, 46, 14);
+		panel.add(lblNewLabel_1);
+
+		JLabel label = new JLabel("New label");
+		label.setBounds(105, 72, 46, 14);
+		panel.add(label);
+
+		JLabel label_1 = new JLabel("New label");
+		label_1.setBounds(105, 97, 46, 14);
+		panel.add(label_1);
+
+		JLabel label_2 = new JLabel("New label");
+		label_2.setBounds(105, 122, 46, 14);
+		panel.add(label_2);
+
+		JLabel label_3 = new JLabel("New label");
+		label_3.setBounds(105, 147, 46, 14);
+		panel.add(label_3);
+
+		JButton RentBookBT = new JButton("Rent Book");
+		RentBookBT.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				Rent frame1 = new Rent();
+				frame1.setVisible(true);
+			}
+		});
+		RentBookBT.setBounds(341, 11, 116, 23);
+		contentPane.add(RentBookBT);
+
+		JButton ReturnBookBT = new JButton("Return Book");
+		ReturnBookBT.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				Return frame1 = new Return();
+				frame1.setVisible(true);
+			}
+		});
+		ReturnBookBT.setBounds(341, 45, 116, 23);
+		contentPane.add(ReturnBookBT);
+
+		JButton AddNewBookBT = new JButton("Add new book");
+		AddNewBookBT.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				AddBook frame2 = new AddBook();
+				frame2.setVisible(true);
+				
+			}
+		});
+		AddNewBookBT.setBounds(341, 79, 116, 23);
+		contentPane.add(AddNewBookBT);
+
+		JButton DeleteBookBT = new JButton("Delete Book");
+		DeleteBookBT.setBounds(341, 116, 116, 23);
+		contentPane.add(DeleteBookBT);
+
+		JButton SearchBookBT = new JButton("Search Book");
+		SearchBookBT.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				SearchBook frame2 = new SearchBook();
+				frame2.setVisible(true);
+				
+			}
+		});
+		SearchBookBT.setBounds(341, 150, 116, 23);
+		contentPane.add(SearchBookBT);
+
+		JButton CreateReaderBT = new JButton("Create Reader");
+		CreateReaderBT.setBounds(493, 11, 122, 23);
+		contentPane.add(CreateReaderBT);
+
+		JButton DeleteReaderBT = new JButton("Delete Reader");
+		DeleteReaderBT.setBounds(493, 45, 122, 23);
+		contentPane.add(DeleteReaderBT);
+
+		JButton FindReaderBT = new JButton("Find Reader");
+		FindReaderBT.setBounds(493, 79, 122, 23);
+		contentPane.add(FindReaderBT);
+
+		JButton btnNewButton = new JButton("Log Out");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				int response = JOptionPane.showConfirmDialog(null, "Bạn có thực sự muốn thoát không?", "Quit QLTV?", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+				if(response == JOptionPane.YES_OPTION) {
+					Login frame1 = new Login();
+					frame1.setVisible(true);
+					dispose();
+				}
+			}
+		});
+		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		btnNewButton.setBounds(465, 248, 122, 30);
+		contentPane.add(btnNewButton);
+
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(10, 212, 63, 14);
+		contentPane.add(lblNewLabel);
+
+	}
+}
