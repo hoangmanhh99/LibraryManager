@@ -1,0 +1,156 @@
+package Process;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import java.awt.Window.Type;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class BookInfo extends JFrame {
+
+	private JPanel contentPane;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					BookInfo frame = new BookInfo(" 'B2 '");
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public BookInfo(String string) throws ClassNotFoundException, SQLException {
+		setTitle("Th\u00F4ng tin s\u00E1ch");
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 559, 311);
+		setLocationRelativeTo(null);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		String sql = "Select * from Book where BookID = '" + string +"' ";
+		ResultSet rs = SQLSvConnection.querry(sql);
+		rs.next();
+		
+		JLabel label = new JLabel("Book ID");
+		label.setBounds(10, 11, 58, 14);
+		contentPane.add(label);
+		
+		JLabel lblBookName = new JLabel("Book Name");
+		lblBookName.setBounds(10, 37, 58, 14);
+		contentPane.add(lblBookName);
+		
+		JLabel lblAuthor = new JLabel("Author");
+		lblAuthor.setBounds(10, 62, 58, 14);
+		contentPane.add(lblAuthor);
+		
+		JLabel lblCategory = new JLabel("Category");
+		lblCategory.setBounds(10, 87, 58, 14);
+		contentPane.add(lblCategory);
+		
+		JLabel lblPublisher = new JLabel("Publisher");
+		lblPublisher.setBounds(10, 112, 58, 14);
+		contentPane.add(lblPublisher);
+		
+		JLabel lblYear = new JLabel("Year");
+		lblYear.setBounds(10, 137, 58, 14);
+		contentPane.add(lblYear);
+		
+		JLabel lblStatus = new JLabel("Status");
+		lblStatus.setBounds(10, 162, 58, 14);
+		contentPane.add(lblStatus);
+		
+		JLabel lblPrice = new JLabel("Price");
+		lblPrice.setBounds(10, 187, 58, 14);
+		contentPane.add(lblPrice);
+		
+		JButton button = new JButton("Check");
+		button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+			}
+		});
+		button.setBounds(80, 238, 89, 23);
+		contentPane.add(button);
+		
+		JButton btnChange = new JButton("Change");
+		btnChange.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		btnChange.setBounds(191, 238, 89, 23);
+		contentPane.add(btnChange);
+		
+		JButton btnExit = new JButton("Exit");
+		btnExit.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				
+			}
+		});
+		btnExit.setBounds(444, 249, 89, 23);
+		contentPane.add(btnExit);
+		
+		JButton btnDelete = new JButton("Delete");
+		btnDelete.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+			}
+		});
+		btnDelete.setBounds(299, 238, 89, 23);
+		contentPane.add(btnDelete);
+		
+		JLabel lblNewLabel = new JLabel("New label");
+		lblNewLabel.setBounds(123, 11, 119, 14);
+		contentPane.add(lblNewLabel);
+		
+		JLabel label_1 = new JLabel("New label");
+		label_1.setBounds(123, 37, 119, 14);
+		contentPane.add(label_1);
+		
+		JLabel label_2 = new JLabel("New label");
+		label_2.setBounds(123, 62, 119, 14);
+		contentPane.add(label_2);
+		
+		JLabel label_3 = new JLabel("New label");
+		label_3.setBounds(123, 87, 119, 14);
+		contentPane.add(label_3);
+		
+		JLabel label_4 = new JLabel("New label");
+		label_4.setBounds(123, 112, 119, 14);
+		contentPane.add(label_4);
+		
+		JLabel label_5 = new JLabel("New label");
+		label_5.setBounds(123, 137, 119, 14);
+		contentPane.add(label_5);
+		
+		JLabel label_6 = new JLabel("New label");
+		label_6.setBounds(123, 162, 119, 14);
+		contentPane.add(label_6);
+		
+		JLabel label_7 = new JLabel("New label");
+		label_7.setBounds(123, 187, 119, 14);
+		contentPane.add(label_7);
+	}
+
+}
