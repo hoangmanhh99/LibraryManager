@@ -1,0 +1,103 @@
+package Process;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import java.awt.Font;
+import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+
+public class SearchBook extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+	private JTextField textField_2;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					SearchBook frame = new SearchBook();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public SearchBook() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 641, 328);
+		setLocationRelativeTo(null);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblSearchBook = new JLabel("SEARCH BOOK");
+		lblSearchBook.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSearchBook.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblSearchBook.setBounds(242, 11, 172, 27);
+		contentPane.add(lblSearchBook);
+		
+		JLabel lblBookId = new JLabel("Book ID:");
+		lblBookId.setBounds(154, 52, 71, 14);
+		contentPane.add(lblBookId);
+		
+		textField = new JTextField();
+		textField.setBounds(298, 49, 177, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnNewButton = new JButton("Search");
+		btnNewButton.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent arg0) {
+				BookInfo frame1;
+				try {
+					frame1 = new BookInfo(textField.getText());
+					frame1.setVisible(true);
+				} catch (ClassNotFoundException | SQLException e1) {
+					// TODO: handle exception
+					e1.printStackTrace();
+				}
+			}
+		});
+		btnNewButton.setBounds(260, 200, 127, 23);
+		contentPane.add(btnNewButton);
+		
+		JLabel lblBookName = new JLabel("Book Name:");
+		lblBookName.setBounds(154, 95, 71, 14);
+		contentPane.add(lblBookName);
+		
+		JLabel lblAuthor = new JLabel("Author:");
+		lblAuthor.setBounds(154, 137, 71, 14);
+		contentPane.add(lblAuthor);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(298, 92, 177, 20);
+		contentPane.add(textField_1);
+		
+		textField_2 = new JTextField();
+		textField_2.setColumns(10);
+		textField_2.setBounds(298, 134, 177, 20);
+		contentPane.add(textField_2);
+	}
+}
