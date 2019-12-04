@@ -1,0 +1,150 @@
+package Process;
+
+import java.awt.BorderLayout;
+import java.awt.Event;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JButton;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.sql.SQLException;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+
+public class Login extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField UsernameField;
+	private JTextField PasswordField;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Login frame = new Login();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Login() {
+		setTitle("Qu\u1EA3n l\u00FD th\u01B0 vi\u1EC7n\r\n");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
+		setLocationRelativeTo(null);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblUsername = new JLabel("Username:");
+		lblUsername.setBounds(47, 104, 66, 24);
+		contentPane.add(lblUsername);
+		
+		JLabel lblPassword = new JLabel("Password:");
+		lblPassword.setBounds(47, 139, 66, 24);
+		contentPane.add(lblPassword);
+		
+		UsernameField = new JTextField();
+		UsernameField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		UsernameField.setBounds(145, 110, 187, 20);
+		contentPane.add(UsernameField);
+		UsernameField.setColumns(10);
+		
+		PasswordField = new JTextField();
+		PasswordField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if(e.getKeyCode() == KeyEvent.VK_ENTER) {
+					String user = UsernameField.getText();
+					String password = PasswordField.getText();
+					if((user.equals("admin")) && (password.equals("123"))){
+						MainMenu frame1;
+						try {
+							frame1 = new MainMenu(user);
+							frame1.setVisible(true);
+						} catch (ClassNotFoundException | SQLException e1) {
+							// TODO: handle exception
+							e1.printStackTrace();
+							
+						}
+						
+						dispose();
+					} else {
+						UsernameField.setText(user);
+						PasswordField.setText(user);
+						JOptionPane.showMessageDialog(rootPane, "Tài khoản không tồn tại!!!");
+						
+					}
+				}
+			}
+			
+		});
+		PasswordField.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		PasswordField.setColumns(10);
+		PasswordField.setBounds(145, 141, 187, 20);
+		contentPane.add(PasswordField);
+		
+		JLabel lblNewLabel = new JLabel("QU\u1EA2N L\u00DD TH\u01AF VI\u1EC6N");
+		lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 15));
+		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel.setBounds(116, 36, 216, 39);
+		contentPane.add(lblNewLabel);
+		
+		JButton Loginbt = new JButton("Login");
+		
+		Loginbt.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				String user = UsernameField.getText();
+				String password = PasswordField.getText();
+				if((user.equals("admin")) && (password.equals("123"))){
+					MainMenu frame1;
+					try {
+						frame1 = new MainMenu(user);
+						frame1.setVisible(true);
+					} catch (ClassNotFoundException | SQLException e1) {
+						// TODO: handle exception
+						e1.printStackTrace();
+						
+					}
+					
+					dispose();
+				} else {
+					UsernameField.setText(user);
+					PasswordField.setText(user);
+					JOptionPane.showMessageDialog(rootPane, "Tài khoản không tồn tại!!!");
+					
+				}
+			}
+		});
+		Loginbt.setFont(new Font("Tahoma", Font.BOLD, 13));
+		Loginbt.setBounds(184, 194, 89, 23);
+		contentPane.add(Loginbt);
+	}
+}
