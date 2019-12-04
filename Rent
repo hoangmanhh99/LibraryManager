@@ -1,0 +1,168 @@
+package Process;
+
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+import javax.swing.JButton;
+import java.awt.Color;
+import javax.swing.SwingConstants;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+
+public class Rent extends JFrame {
+
+	private JPanel contentPane;
+	private JTextField textField;
+	private JTextField textField_1;
+
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					Rent frame = new Rent();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
+	public Rent() {
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 647, 391);
+		setLocationRelativeTo(null);
+		contentPane = new JPanel();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
+		
+		JLabel lblBookId = new JLabel("Book ID");
+		lblBookId.setBounds(10, 11, 58, 14);
+		contentPane.add(lblBookId);
+		
+		textField = new JTextField();
+		textField.setBounds(78, 8, 256, 20);
+		contentPane.add(textField);
+		textField.setColumns(10);
+		
+		JButton btnCheck = new JButton("Check");
+		btnCheck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnCheck.setBounds(382, 7, 89, 23);
+		contentPane.add(btnCheck);
+		
+		JButton btnFindBook = new JButton("Find book");
+		btnFindBook.setBounds(518, 7, 89, 23);
+		contentPane.add(btnFindBook);
+		
+		JPanel panel = new JPanel();
+		panel.setBounds(10, 36, 611, 131);
+		panel.setBackground(Color.LIGHT_GRAY);
+		panel.setForeground(Color.BLACK);
+		contentPane.add(panel);
+		panel.setLayout(null);
+		
+		JLabel lblNewLabel = new JLabel("Book Name");
+		lblNewLabel.setBounds(10, 11, 82, 14);
+		lblNewLabel.setVerticalAlignment(SwingConstants.TOP);
+		lblNewLabel.setHorizontalAlignment(SwingConstants.LEFT);
+		panel.add(lblNewLabel);
+		
+		JLabel lblAuthor = new JLabel("Author");
+		lblAuthor.setVerticalAlignment(SwingConstants.TOP);
+		lblAuthor.setHorizontalAlignment(SwingConstants.LEFT);
+		lblAuthor.setBounds(10, 36, 82, 14);
+		panel.add(lblAuthor);
+		
+		JLabel lblPublisher = new JLabel("Publisher");
+		lblPublisher.setVerticalAlignment(SwingConstants.TOP);
+		lblPublisher.setHorizontalAlignment(SwingConstants.LEFT);
+		lblPublisher.setBounds(10, 61, 82, 14);
+		panel.add(lblPublisher);
+		
+		JLabel lblCategory = new JLabel("Category");
+		lblCategory.setVerticalAlignment(SwingConstants.TOP);
+		lblCategory.setHorizontalAlignment(SwingConstants.LEFT);
+		lblCategory.setBounds(10, 86, 82, 14);
+		panel.add(lblCategory);
+		
+		JLabel lblPrice = new JLabel("Price");
+		lblPrice.setVerticalAlignment(SwingConstants.TOP);
+		lblPrice.setHorizontalAlignment(SwingConstants.LEFT);
+		lblPrice.setBounds(10, 106, 82, 14);
+		panel.add(lblPrice);
+		
+		JLabel label = new JLabel("Book ID");
+		label.setBounds(10, 178, 58, 14);
+		contentPane.add(label);
+		
+		textField_1 = new JTextField();
+		textField_1.setColumns(10);
+		textField_1.setBounds(78, 175, 256, 20);
+		contentPane.add(textField_1);
+		
+		JButton button = new JButton("Check");
+		button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+			}
+		});
+		button.setBounds(382, 178, 89, 23);
+		contentPane.add(button);
+		
+		JButton button_1 = new JButton("Find book");
+		button_1.setBounds(518, 174, 89, 23);
+		contentPane.add(button_1);
+		
+		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(Color.LIGHT_GRAY);
+		panel_1.setBounds(10, 203, 611, 55);
+		contentPane.add(panel_1);
+		panel_1.setLayout(null);
+		
+		JLabel lblReaderId = new JLabel("Reader ID");
+		lblReaderId.setVerticalAlignment(SwingConstants.TOP);
+		lblReaderId.setHorizontalAlignment(SwingConstants.LEFT);
+		lblReaderId.setBounds(10, 11, 82, 14);
+		panel_1.add(lblReaderId);
+		
+		JLabel lblReaderName = new JLabel("Reader Name");
+		lblReaderName.setVerticalAlignment(SwingConstants.TOP);
+		lblReaderName.setHorizontalAlignment(SwingConstants.LEFT);
+		lblReaderName.setBounds(10, 36, 82, 14);
+		panel_1.add(lblReaderName);
+		
+		JLabel lblDeposits = new JLabel("Deposits");
+		lblDeposits.setBounds(10, 269, 82, 14);
+		contentPane.add(lblDeposits);
+		
+		JLabel lblStartDate = new JLabel("Start date");
+		lblStartDate.setBounds(10, 293, 82, 14);
+		contentPane.add(lblStartDate);
+		
+		JLabel lblEndDate = new JLabel("End date");
+		lblEndDate.setBounds(316, 293, 82, 14);
+		contentPane.add(lblEndDate);
+		
+		JButton btnRent = new JButton("Rent");
+		btnRent.setBounds(10, 318, 89, 23);
+		contentPane.add(btnRent);
+		
+		JButton btnCancel = new JButton("Cancel");
+		btnCancel.setBounds(518, 318, 89, 23);
+		contentPane.add(btnCancel);
+	}
+}
